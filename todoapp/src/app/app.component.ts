@@ -1,3 +1,6 @@
+import { HttpClient } from "@angular/common/http";
+import { config } from './config';
+
 import { Component } from '@angular/core';
 import { Customers } from './types/customer';
 
@@ -29,21 +32,35 @@ import { Customers } from './types/customer';
 })
 export class AppComponent {
   title = 'Gestionnaire de factures clients';
-  customers: Customers = [
-    { id: 1, completeName: "Premier client", mail: "sonsuper@mail"},
-    { id: 2, completeName: "Second client", mail: "sonincroyable@mail"},
-  ];
+  customers: Customers = []
+  constructor(private http: HttpClient){
+     // Ayant obtenu l'instance de HttpClient, on peut l'utiliser
+    // pour appeler Supabase en méthode GET. On peut tout de suite
+    // indiquer à la méthode GET qu'elle doit s'attendre à recevoir un json
+    // correspondant à un tableau de tâches (le fameux type Tasks).
+    // On n'oubliera pas aussi de préciser pour cette requête HTTP
+    // les entêtes importantes comme le Content-Type ou la clé API
+    this.http.get<Customers>(config.supabaseUrl, {
+      headers: {
+        "Content-Type": "application/json",
+        apiKey: config.supabaseApiKey
+      }
+  })
+  // Lorsque la requête aura terminé son travail et que le serveur
+  // aura répondu, nous recevrons une liste de tâches que
+  // nous pourrons alors assigner à notre propriété "tasks"
+  .subscribe((customers) => this.customers = customers)
+  }
 
-   // La méthode addTask recevra une string
-   addCustomer(completeName: string, mail :string) {
-    // Elle s'en servira pour créer une nouvelle tâche dans 
-    // le tableau des tâches, et Angular mettra à jour 
-    // l'affichage afin d'en tenir compte !
-    this.customers.push({
+  // La méthode addTask recevra une string
+  addCustomer(completeName: string, mail :string) {
+   // Elle s'en servira pour créer une nouvelle tâche dans 
+   // le tableau des tâches, et Angular mettra à jour 
+   // l'affichage afin d'en tenir compte !
+   this.customers.push({
       id: Date.now(),
       completeName: completeName,
       mail: mail
     });
   }
-
 }
