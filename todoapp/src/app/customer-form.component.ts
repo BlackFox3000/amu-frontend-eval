@@ -6,12 +6,13 @@ import { FormControl, FormGroup } from "@angular/forms";
 @Component({
     selector: "app-customer-form",
     template: `
-        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+        <form (ngSubmit)="onSubmit()" [formGroup]="form" style="display: flex; flex-wrap: wrap;">
             <input 
               type="text" 
               formControlName="completeName"
               name="completeName-text" 
               placeholder="Nom du client" 
+              style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
             />
 
             <input 
@@ -19,8 +20,10 @@ import { FormControl, FormGroup } from "@angular/forms";
             formControlName="mail"
             name="mail-text" 
             placeholder="Mail du client" 
+            style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
           />
-            <button>Ajouter</button>
+            <button style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
+            >Ajouter</button>
         </form>
     `
 })
