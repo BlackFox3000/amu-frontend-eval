@@ -56,6 +56,7 @@ export class InvoiceFormComponent {
 
     onSubmit() {
         console.log(this.form.value);
+        console.log("id customer: "+this.customerId);
         // Au moment de la soumission, on va déclencher un événement
         // Et la donnée que l'on va émettre sera la valeur du champ 
         // "text" qui se trouve dans notre formulaire !

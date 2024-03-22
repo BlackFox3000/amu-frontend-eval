@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Invoices } from "../types/invoice";
-import { configCustomer, configInvoice } from "../config";
+import {configInvoice } from "../config";
 
 const SUPABASE_URL = configInvoice.supabaseUrl;
 const SUPABASE_API_KEY = configInvoice.supabaseApiKey;
@@ -59,8 +59,9 @@ export class InvoicesService {
      * nouvellement créé
      */
     create(customerId: number,cost: number, state: string): Observable<Invoices> {
+        console.log("envoie :"+customerId+ " - "+cost +" - "+state )
         return this.http.post<Invoices>(SUPABASE_URL, {
-            customerId: customerId,
+            customer: customerId,
             cost: cost,
             state: state
         }, {

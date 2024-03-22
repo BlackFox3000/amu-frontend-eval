@@ -24,12 +24,6 @@ import { Router  } from '@angular/router';
       private service: CustomersService,
       private route: Router 
       ){ }
-    
-   ngOnInit() {
-      this.service
-        .findAll()
-        .subscribe((customers) => this.customers = customers)
-    }
    
     addCustomer(completeName: string, mail :string) {
       this.service
