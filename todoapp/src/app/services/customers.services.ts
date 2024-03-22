@@ -39,20 +39,15 @@ export class CustomersService {
         });
     }
 
-    // /**  Inutile ici TODO Remove si non utilisé (@cleanCode)
-    //  * Met à jour le statut d'une tâche et retourne la tâche mise à jour (dans un tableau contenant une tâche)
-    //  */
-    // toggleDone(id: number, isDone: boolean): Observable<Customers> {
-    //     return this.http.patch<Customers>(SUPABASE_URL + '?id=eq.' + id, {
-    //         done: isDone
-    //     }, {
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             apiKey: SUPABASE_API_KEY,
-    //             Prefer: "return=representation"
-    //         }
-    //     });
-    // }
+    findOne(id: number): Observable<Customers> {
+        return this.http.get<Customers>(SUPABASE_URL + '?id=eq.' + id, {
+            headers: {
+                "Content-Type": "application/json",
+                apiKey: configCustomer.supabaseApiKey,
+                Prefer: "return=representation"
+            }
+        });
+    }
 
     /**
      * Créé un client auprès de l'API qui nous retournera un tableau contenant le client

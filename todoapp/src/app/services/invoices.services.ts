@@ -30,6 +30,15 @@ export class InvoicesService {
         });
     }
 
+    findList(customerId: number): Observable<Invoices> {
+        return this.http.get<Invoices>(SUPABASE_URL + '?customer=eq.' + customerId, {
+            headers: {
+                "Content-Type": "application/json",
+                apiKey: SUPABASE_API_KEY
+            }
+        });
+    }
+
     // /**  Inutile ici TODO mettre en place
     //  * Met à jour le statut d'une tâche et retourne la tâche mise à jour (dans un tableau contenant une tâche)
     //  */

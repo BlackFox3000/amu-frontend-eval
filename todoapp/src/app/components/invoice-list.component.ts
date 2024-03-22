@@ -2,7 +2,9 @@
 
 import { Component, Input } from "@angular/core";
 import { Invoices } from "../types/invoice";
-
+import { ActivatedRoute } from "@angular/router";
+import { Customer } from "../types/customer";
+import { CustomersService } from "../services/customers.services";
 
 @Component({
     // Ce composant sera affiché par Angular à chaque fois
@@ -11,22 +13,29 @@ import { Invoices } from "../types/invoice";
     selector: 'app-invoice-list',
     // Le HTML reprend ici notre liste de tâches
     template: `
-    <ul>
-        <li *ngFor="let item of invoices" 
-            style="display: flex;
-            justify-content: space-between; 
-            align-items: center;
-            margin-right: 10px;">
-        <span>
-            {{ item.cost }} €
-        </span>
-        <span>
-            {{ item.state }}
-        </span>
-        <input type="button" id="item-{{ item.id }}" value="Modifier"/>
-        
-        </li>
-    </ul>
+    <ng-container *ngIf="customer">
+        <button routerLink="/{{customer.id}}/invoices/add">Créer une facture</button>
+        <ul>
+        <ng-container *ngIf="invoices && invoices.length >0">
+            <li *ngFor="let item of invoices" 
+                style="display: flex;
+                justify-content: space-between; 
+                align-items: center;
+                margin-right: 10px;">
+            <span>
+                {{ item.cost }} €
+            </span>
+            <span>
+                {{ item.state }}
+            </span>
+            <a routerLink="/{{ item.customer }}/invoices/{{ item.id }}">Détails</a>
+            
+            </li>
+            </ng-container>
+        </ul>
+    </ng-container>
+
+    <p *ngIf="!customer">Client inconnu.</p>
     `,
 })
 export class InvoiceListComponent {
@@ -37,4 +46,21 @@ export class InvoiceListComponent {
     // si c'est le cas
     @Input()
     invoices : Invoices = [];
+
+    constructor(
+        private route: ActivatedRoute,
+        private serviceCustomer: CustomersService,
+    ){}
+
+    customer?: Customer;
+
+    ngOnInit() {
+        const id: number = Number(this.route.snapshot.paramMap.get('id'));
+
+        this.serviceCustomer
+            .findOne(id)
+            .subscribe(customers => this.customer = customers[0]);    
+
+        console.log(this.invoices)    
+    }
 }

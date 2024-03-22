@@ -3,28 +3,58 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Customer } from "../types/customer";
-import { configCustomer } from "../config";
+import { CustomersService } from "../services/customers.services";
+import { Invoices } from "../types/invoice";
+import { InvoicesService } from "../services/invoices.services";
+
 
 @Component({
     selector: 'app-customer-details-page',
+    standalone: false,
     template: `
-        <p>Ca fonctionne !</p>
+        <ng-container *ngIf="customer">
+            <h2>
+                Fiche de {{ customer.completeName }}
+            </h2>
+            <h3>({{customer.mail}})</h3>
+            
+            <app-invoice-list 
+                [invoices]="invoices"
+            ></app-invoice-list>
+
+            <br />
+            <a routerLink="/">Retour accueil</a>
+        </ng-container>
+
+        <p *ngIf="!customer">En cours de chargement</p>
     `
 })
 export class CustomerDetailsPageComponent { 
-     // On demande à Angular de nous injecter une instance
-    // de la classe ActivatedRoute qui représente la route
-    // actuelle et tous ses détails 
-    constructor(private route: ActivatedRoute) { }
+    invoices: Invoices = [];
+
+    customer?: Customer;
+
+    constructor(
+        private route: ActivatedRoute, 
+        private serviceCustomer: CustomersService,
+        private serviceInvoice: InvoicesService){ }
 
     ngOnInit() {
-        // On peut récupérer le paramètre "id" qui se trouve
-        // dans l'URL, et le transformer en nombre :
         const id: number = Number(this.route.snapshot.paramMap.get('id'));
 
-        // Affichons l'id dans la console pour s'assurer que cela fonctionne
-        console.log("Affichons ", id);
+        this.serviceCustomer
+            .findOne(id)
+            .subscribe(customers => this.customer = customers[0]);
+            
+        this.serviceInvoice
+            .findList(id)
+            .subscribe(invoices =>{
+                if (invoices && invoices.length > 0 && invoices[0]) {
+                    this.invoices.push(invoices[0]) 
+                }
+            } );    
     }
+
 
     // /**
     //  * Récupère les tâches dont l'identifiant correspond

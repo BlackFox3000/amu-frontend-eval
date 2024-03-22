@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Customers } from '../types/customer';
 import { CustomersService } from "../services/customers.services";
+import { Router  } from '@angular/router';
 
 @Component({
     selector: 'app-customer-add',
@@ -19,7 +20,10 @@ import { CustomersService } from "../services/customers.services";
   export class CustomerAddPageComponent {
     customers: Customers = []
 
-    constructor(private service: CustomersService){ }
+    constructor(
+      private service: CustomersService,
+      private route: Router 
+      ){ }
     
    ngOnInit() {
       this.service
@@ -31,6 +35,7 @@ import { CustomersService } from "../services/customers.services";
       this.service
       .create(completeName, mail)
       .subscribe((customers) =>  this.customers.push(customers[0]));
+      this.route.navigate(['/']);
     }
 
   }
