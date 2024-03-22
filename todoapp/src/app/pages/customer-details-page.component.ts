@@ -50,7 +50,7 @@ export class CustomerDetailsPageComponent {
             .findList(id)
             .subscribe(invoices =>{
                 if (invoices && invoices.length > 0 && invoices[0]) {
-                    this.invoices.push(invoices[0]) 
+                    this.invoices= invoices; 
                 }
             } );    
     }

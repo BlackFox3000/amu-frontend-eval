@@ -18,6 +18,7 @@ import { InvoiceFormComponent } from './components/invoice-form.component';
 import { CustomerDetailsPageComponent } from './pages/customer-details-page.component';
 import { CustomerAddPageComponent } from './pages/customer-add-page.component';
 import { InvoiceAddPageComponent } from './pages/invoice-add-page.component';
+import { InvoiceDetailPageComponent } from './pages/invoice-detail-page.component';
 
 // Ici, nous représentons les Routes, c'est une liste d'associations
 // entre URLs et composants. Chaque URL donnera lieu à l'affichage 
@@ -30,7 +31,9 @@ const routes: Routes = [
   // Ici on utilise une URL paramétrée
   { path: ':id/details', component: CustomerDetailsPageComponent },
   // Ici on utilise une URL paramétrée
-  { path: ':id/invoices/add', component: InvoiceAddPageComponent }
+  { path: ':id/invoices/add', component: InvoiceAddPageComponent },
+  // Ici on utilise une URL paramétrée
+  { path: ':idcustomer/invoices/:idinvoice', component: InvoiceDetailPageComponent }
 ]
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ const routes: Routes = [
     InvoiceFormComponent,
     InvoiceListPageComponent,
     InvoiceFormComponent,
-    InvoiceAddPageComponent
+    InvoiceAddPageComponent,
+    InvoiceDetailPageComponent
   ],
   imports: [
     BrowserModule,
