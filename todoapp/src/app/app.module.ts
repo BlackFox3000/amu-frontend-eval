@@ -6,16 +6,17 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CustomerListComponent } from './customer-list.component';
-import { CustomerFormComponent } from './customer-form.component';
+import { CustomerListComponent } from './components/customer-list.component';
+import { CustomerFormComponent } from './components/customer-form.component';
 import { CustomersService } from './services/customers.services';
 import { CustomerListPageComponent } from './pages/customer-list-page.component';
 
 import { InvoicesService } from './services/invoices.services';
 import { InvoiceListPageComponent } from './pages/invoice-list-page.component';
-import { InvoiceListComponent } from './invoice-list.component';
-import { InvoiceFormComponent } from './invoice-form.component';
+import { InvoiceListComponent } from './components/invoice-list.component';
+import { InvoiceFormComponent } from './components/invoice-form.component';
 import { CustomerDetailsPageComponent } from './pages/customer-details-page.component';
+import { CustomerAddPageComponent } from './pages/customer-add-page.component';
 
 // Ici, nous représentons les Routes, c'est une liste d'associations
 // entre URLs et composants. Chaque URL donnera lieu à l'affichage 
@@ -23,6 +24,8 @@ import { CustomerDetailsPageComponent } from './pages/customer-details-page.comp
 const routes: Routes = [
   // La page d'accueil affichera la liste des tâches
   { path: '', component: CustomerListPageComponent },
+  // La page d'accueil affichera la liste des tâches
+  { path: 'create', component: CustomerAddPageComponent },
   // Ici on utilise une URL paramétrée
   { path: ':id/details', component: CustomerDetailsPageComponent }
 ]
@@ -33,6 +36,7 @@ const routes: Routes = [
     CustomerFormComponent,
     CustomerListPageComponent,
     CustomerDetailsPageComponent,
+    CustomerAddPageComponent,
     InvoiceListComponent,
     InvoiceFormComponent,
     InvoiceListPageComponent

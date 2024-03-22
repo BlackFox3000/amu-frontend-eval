@@ -52,8 +52,12 @@
   }
 
   a {
-    color: rgb(233, 109, 130);
+    color: rgb(109, 159, 233);
     text-decoration: none;
+  }
+
+  h1 > a {
+    color: black
   }
 
   form {
@@ -69,7 +73,7 @@
   }
 
   button {
-    background-color: rgb(109, 159, 233);;
+    background-color: rgb(109, 159, 233);
     color: white;
     border: 2px solid white;
     border-radius: 5px;
@@ -92,6 +96,7 @@
 
   ul li {
     list-style: none;
+    margin-bottom: 5%;
   }
 
   label {

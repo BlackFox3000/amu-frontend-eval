@@ -1,7 +1,7 @@
 // src/app/customer-list.component.ts
 
 import { Component, Input } from "@angular/core";
-import { Customers } from './types/customer';
+import { Customers } from '../types/customer';
 
 
 @Component({
@@ -11,6 +11,7 @@ import { Customers } from './types/customer';
     selector: 'app-customer-list',
     // Le HTML reprend ici notre liste de tâches
     template: `
+    <button routerLink="/create">Créer un client</button>
     <ul>
         <li *ngFor="let item of customers" 
             style="display: flex;
@@ -23,7 +24,7 @@ import { Customers } from './types/customer';
         <span>
             {{ item.mail }}
         </span>
-        <input type="button" id="item-{{ item.id }}" value="Détails"/>
+        <a routerLink="/{{ item.id }}/details">Details</a>
         
         </li>
     </ul>

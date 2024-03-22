@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   template: `
   <div id="app" >
 
-    <h1>{{title}}</h1>
+    <h1><a routerLink="/">{{title}}</a></h1>
     <main>
       <router-outlet></router-outlet>
     </main>
@@ -18,5 +18,5 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  title = 'Gestionnaire de factures clients';
+  title = '💰 Gestionnaire de factures clients 💰';
 }

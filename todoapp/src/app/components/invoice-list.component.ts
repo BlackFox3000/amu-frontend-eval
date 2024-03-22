@@ -1,7 +1,7 @@
 // src/app/invoice-list.component.ts
 
 import { Component, Input } from "@angular/core";
-import { Invoices } from "./types/invoice";
+import { Invoices } from "../types/invoice";
 
 
 @Component({

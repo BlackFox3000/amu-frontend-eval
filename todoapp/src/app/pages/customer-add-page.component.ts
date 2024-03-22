@@ -3,18 +3,20 @@ import { Customers } from '../types/customer';
 import { CustomersService } from "../services/customers.services";
 
 @Component({
-    selector: 'app-root',
+    selector: 'app-customer-add',
     standalone: false,
     template: `
-    <h2>🧑‍💼 Liste de client 🧑‍💼</h2>
-    <app-customer-list 
-        [customers]="customers"
-      ></app-customer-list>
+    <h2>Créer un client</h2>
+
+    <app-customer-form
+        (onNewCustomer)="addCustomer($event.completeName, $event.mail)"
+    ></app-customer-form>
+      
     `,
     styles: []
   })
 
-  export class CustomerListPageComponent {
+  export class CustomerAddPageComponent {
     customers: Customers = []
 
     constructor(private service: CustomersService){ }
@@ -25,5 +27,11 @@ import { CustomersService } from "../services/customers.services";
         .subscribe((customers) => this.customers = customers)
     }
    
+    addCustomer(completeName: string, mail :string) {
+      this.service
+      .create(completeName, mail)
+      .subscribe((customers) =>  this.customers.push(customers[0]));
+    }
+
   }
   
