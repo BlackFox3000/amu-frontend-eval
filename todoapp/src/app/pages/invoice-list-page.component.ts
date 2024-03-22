@@ -1,38 +1,38 @@
 import { Component } from '@angular/core';
-import { Customers } from '../types/customer';
-import { CustomersService } from "../services/customers.services";
+import { Invoices } from '../types/invoice';
+import { InvoicesService } from "../services/invoices.services";
 
 @Component({
     selector: 'app-root',
     standalone: false,
     template: `
-    <app-customer-list 
-        [customers]="customers"
-      ></app-customer-list>
+    <app-invoice-list 
+        [invoices]="invoices"
+      ></app-invoice-list>
 
-    <app-customer-form
-        (onNewCustomer)="addCustomer($event.completeName, $event.mail)"
-    ></app-customer-form>
+    <app-invoice-form
+        (onNewInvoice)="addInvoice($event.customerId, $event.cost, $event.state)"
+    ></app-invoice-form>
       
     `,
     styles: []
   })
 
-  export class CustomerListPageComponent {
-    customers: Customers = []
+  export class InvoiceListPageComponent {
+    invoices: Invoices = []
 
-    constructor(private service: CustomersService){ }
+    constructor(private service: InvoicesService){ }
     
    ngOnInit() {
       this.service
         .findAll()
-        .subscribe((customers) => this.customers = customers)
+        .subscribe((invoices) => this.invoices = invoices)
     }
    
-    addCustomer(completeName: string, mail :string) {
+    addInvoice(customerId: number, cost: number, state :string) {
       this.service
-      .create(completeName, mail)
-      .subscribe((customers) =>  this.customers.push(customers[0]));
+      .create(customerId, cost, state)
+      .subscribe((invoices) =>  this.invoices.push(invoices[0]));
     }
 
   }

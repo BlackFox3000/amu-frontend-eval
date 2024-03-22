@@ -10,12 +10,19 @@ import { CustomerFormComponent } from './customer-form.component';
 import { CustomersService } from './services/customers.services';
 import { CustomerListPageComponent } from './pages/customer-list-page.component';
 
+import { InvoicesService } from './services/invoices.services';
+import { InvoiceListPageComponent } from './pages/invoice-list-page.component';
+import { InvoiceListComponent } from './invoice-list.component';
+import { InvoiceFormComponent } from './invoice-form.component';
 @NgModule({
   declarations: [
     AppComponent,
     CustomerListComponent,
     CustomerFormComponent,
-    CustomerListPageComponent
+    CustomerListPageComponent,
+    InvoiceListComponent,
+    InvoiceFormComponent,
+    InvoiceListPageComponent
   ],
   imports: [
     BrowserModule,
@@ -30,8 +37,8 @@ import { CustomerListPageComponent } from './pages/customer-list-page.component'
     HttpClientModule
   ],
   providers: [
-    
-    CustomersService
+    CustomersService,
+    InvoicesService
   ],
   bootstrap: [AppComponent]
 })
