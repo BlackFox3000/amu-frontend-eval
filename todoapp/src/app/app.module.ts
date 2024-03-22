@@ -7,12 +7,15 @@ import { AppComponent } from './app.component';
 import { CustomerListComponent } from './customer-list.component';
 
 import { CustomerFormComponent } from './customer-form.component';
+import { CustomersService } from './services/customers.services';
+import { CustomerListPageComponent } from './pages/customer-list-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerListComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    CustomerListPageComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +30,8 @@ import { CustomerFormComponent } from './customer-form.component';
     HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    
+    CustomersService
   ],
   bootstrap: [AppComponent]
 })

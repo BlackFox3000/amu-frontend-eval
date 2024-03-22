@@ -1,8 +1,10 @@
 import { HttpClient } from "@angular/common/http";
-import { config } from './config';
+import { configCustomer } from './config';
 
 import { Component } from '@angular/core';
 import { Customers } from './types/customer';
+
+import { CustomersService } from "./services/customers.services";
 
 @Component({
   selector: 'app-root',
@@ -12,57 +14,37 @@ import { Customers } from './types/customer';
 
     <h1>{{title}}</h1>
     <main>
-      <app-customer-list 
-        [customers]="customers"
-      ></app-customer-list>
-
-      <!-- TODO : Placer le formualire sur une nouvelle page -->
+       <!-- TODO : Placer le formualire sur une nouvelle page -->
       <input type="button" value="Créer un client"
       onclick="console.log('TODO : page à créer')"/>
 
-      <app-customer-form
-        (onNewCustomer)="addCustomer($event.completeName, $event.mail)"
-      ></app-customer-form>
-      
     </main>
   </div>
     
   `,
   styles: []
 })
+
 export class AppComponent {
   title = 'Gestionnaire de factures clients';
   customers: Customers = []
-  constructor(private http: HttpClient){ }
+  constructor(private http: HttpClient, private service: CustomersService){ }
   
 
  ngOnInit() {
-    this.http.get<Customers>(config.supabaseUrl,{
-      headers: {
-        "Content-Type": "application/json",
-        apiKey: config.supabaseApiKey
-      }
-    }) .subscribe((customers) => this.customers = customers)
+    // On remplace le code de la requête HTTP par l'appel
+    // à la méthode findAll() de notre service, qui renverra
+    // exactement la même chose que ce que renvoyait le
+    // HttpClient, on réagira donc de la même manière via la 
+    // méthode subscribe()
+    this.service
+      .findAll()
+      .subscribe((customers) => this.customers = customers)
   }
  
   addCustomer(completeName: string, mail :string) {
-   // Elle s'en servira pour créer une nouvelle tâche dans 
-   // le tableau des tâches, et Angular mettra à jour 
-   // l'affichage afin d'en tenir compte !
-  this.http.post<Customers>(
-    config.supabaseUrl,
-    {
-      completeName: completeName,
-      mail: mail
-    },
-    {
-      headers:{
-        "Content-Type":"application/json",
-        apiKey:config.supabaseApiKey,
-        Prefer: "return=representation"
-      }
-    }
-  ).subscribe((customers) =>  this.customers.push(customers[0])
-  );
+    this.service
+    .create(completeName, mail)
+    .subscribe((customers) =>  this.customers.push(customers[0]));
   }
 }
