@@ -12,10 +12,11 @@
     background-color:rgb(8, 17, 48)
   }
 
-  app-root {
+  body > app-root {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
   }
 
@@ -39,6 +40,9 @@
 
   main {
     height: 60%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
   }
 
   h1 {

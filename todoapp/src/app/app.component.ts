@@ -5,14 +5,11 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   standalone: false,
   template: `
-  <div id="app">
+  <div id="app" >
 
     <h1>{{title}}</h1>
     <main>
-       <!-- TODO : Placer le formualire sur une nouvelle page -->
-      <input type="button" value="Créer un client"
-      onclick="console.log('TODO : page à créer')"/>
-
+      <router-outlet></router-outlet>
     </main>
   </div>
     
