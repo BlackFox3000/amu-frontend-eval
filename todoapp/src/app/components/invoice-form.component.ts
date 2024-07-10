@@ -11,20 +11,21 @@ import { FormControl, FormGroup } from "@angular/forms";
             <input 
               type="text" 
               formControlName="cost"
-              name="cost-number" 
+              name="amount" 
               placeholder="Montant de la facture" 
               style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
             />
 
             <select 
-            formControlName="state"
+            name="status"
+            formControlName="status"
             style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
           >
-            <option value="envoyee">Envoyée</option>
-            <option value="payee">Payée</option>
+            <option value="SENT">Envoyée</option>
+            <option value="PAID">Payée</option>
             </select> 
             <button style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
-            >Ajouter</button>
+            >Enregistrer la facture</button>
         </form>
     `
 })

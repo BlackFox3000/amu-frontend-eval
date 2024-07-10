@@ -29,7 +29,7 @@ const routes: Routes = [
   // La page d'accueil affichera la liste des tâches
   { path: 'create', component: CustomerAddPageComponent },
   // Ici on utilise une URL paramétrée
-  { path: ':id/details', component: CustomerDetailsPageComponent },
+  { path: ':id', component: CustomerDetailsPageComponent },
   // Ici on utilise une URL paramétrée
   { path: ':id/invoices/add', component: InvoiceAddPageComponent },
   // Ici on utilise une URL paramétrée

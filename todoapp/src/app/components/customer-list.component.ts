@@ -19,12 +19,12 @@ import { Customers } from '../types/customer';
             align-items: center;
             margin-right: 10px;">
         <span>
-            {{ item.completeName }}
+        <a routerLink="/{{ item.id }}">{{ item.fullName }}</a>
         </span>
         <span>
-            {{ item.mail }}
+            {{ item.email }}
         </span>
-        <a routerLink="/{{ item.id }}/details">Details</a>
+        <a routerLink="/{{ item.id }}">Details</a>
         
         </li>
     </ul>

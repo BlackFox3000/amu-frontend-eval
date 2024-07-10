@@ -9,21 +9,21 @@ import { FormControl, FormGroup } from "@angular/forms";
         <form (ngSubmit)="onSubmit()" [formGroup]="form" style="display: flex; flex-wrap: wrap;">
             <input 
               type="text" 
-              formControlName="completeName"
-              name="completeName-text" 
+              formControlName="fullName"
+              name="fullName" 
               placeholder="Nom du client" 
               style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
             />
 
             <input 
             type="text" 
-            formControlName="mail"
-            name="mail-text" 
+            formControlName="email"
+            name="email" 
             placeholder="Mail du client" 
             style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
           />
             <button style="flex: 1; margin-right: 10px; margin-bottom: 10px;"
-            >Ajouter</button>
+            >Enregistrer</button>
         </form>
     `
 })
@@ -36,7 +36,7 @@ export class CustomerFormComponent {
     // de la classe EventEmitter tout en précisant que l'information
     // qui sera émise sera une string (le texte tapé dans le formulaire !) :
     @Output()
-    onNewCustomer = new EventEmitter<{ completeName: string, mail: string }>();
+    onNewCustomer = new EventEmitter<{ fullName: string, email: string }>();
 
 
     // Notre formulaire sera représenté par la propriété "form"
@@ -47,8 +47,8 @@ export class CustomerFormComponent {
     // toutes les fonctionnalités nécessaires à gérer des champs de 
     // formulaires et en extraire les données !
     form = new FormGroup({
-        completeName: new FormControl(),
-        mail: new FormControl()
+        fullName: new FormControl(),
+        email: new FormControl()
     });
 
     onSubmit() {
@@ -58,15 +58,15 @@ export class CustomerFormComponent {
         // "text" qui se trouve dans notre formulaire !
         this.onNewCustomer.emit(
             {
-                completeName: this.form.value.completeName,
-                mail : this.form.value.mail
+                fullName: this.form.value.fullName,
+                email : this.form.value.email
             });
 
         // On pourra même réinitialiser la valeur du formulaire
         // une fois que le traitement sera terminé :
         this.form.setValue({
-            completeName: '',
-            mail: '',
+            fullName: '',
+            email: '',
         });
     }
 }

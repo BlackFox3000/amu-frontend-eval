@@ -14,25 +14,34 @@ import { CustomersService } from "../services/customers.services";
     // Le HTML reprend ici notre liste de tâches
     template: `
     <ng-container *ngIf="customer">
-        <button routerLink="/{{customer.id}}/invoices/add">Créer une facture</button>
-        <ul>
-        <ng-container *ngIf="invoices && invoices.length >0">
-            <li *ngFor="let item of invoices" 
-                style="display: flex;
-                justify-content: space-between; 
-                align-items: center;
-                margin-right: 10px;">
-            <span>
-                {{ item.cost }} €
-            </span>
-            <span>
-                {{ item.state }}
-            </span>
-            <a routerLink="/{{ item.customer }}/invoices/{{ item.id }}">Détails</a>
-            
-            </li>
-            </ng-container>
-        </ul>
+        <button routerLink="/{{ customer.id }}/invoices/add">Créer une facture</button>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Montant</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Détails</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngIf="invoices && invoices.length >0">
+                    <tr *ngFor="let item of invoices" >
+                    <td>
+                        {{ item.cost }} €
+                    </td>
+                    <td *ngIf="item.state === 'PAID'">
+                        payée
+                    </td>
+                    <td *ngIf="item.state === 'SENT'">
+                        envoyée
+                    </td>
+                    <td>
+                    <a routerLink="/{{ item.customer }}/invoices/{{ item.id }}">Détails</a>
+                    </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
     </ng-container>
 
     <p *ngIf="!customer">Client inconnu.</p>

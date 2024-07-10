@@ -46,6 +46,9 @@ cd votre_application
 # lancer l'application :
 npm run serve
 
+# entrer dans le dossier
+cd ..
+
 # lancer les tests :
 npm run cy:run
 # ou

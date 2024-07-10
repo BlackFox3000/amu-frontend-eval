@@ -53,10 +53,10 @@ export class CustomersService {
      * Créé un client auprès de l'API qui nous retournera un tableau contenant le client
      * nouvellement créé
      */
-    create(completeName: string, mail: string): Observable<Customers> {
+    create(fullName: string, email: string): Observable<Customers> {
         return this.http.post<Customers>(SUPABASE_URL, {
-            completeName: completeName,
-            mail: mail
+            fullName: fullName,
+            email: email
         }, {
             headers: {
                 "Content-Type": "application/json",

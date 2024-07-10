@@ -10,7 +10,7 @@ import { Router  } from '@angular/router';
     <h2>Créer un client</h2>
 
     <app-customer-form
-        (onNewCustomer)="addCustomer($event.completeName, $event.mail)"
+        (onNewCustomer)="addCustomer($event.fullName, $event.email)"
     ></app-customer-form>
       
     `,
@@ -25,11 +25,13 @@ import { Router  } from '@angular/router';
       private route: Router 
       ){ }
    
-    addCustomer(completeName: string, mail :string) {
+    addCustomer(fullName: string, email :string) {
       this.service
-      .create(completeName, mail)
-      .subscribe((customers) =>  this.customers.push(customers[0]));
-      this.route.navigate(['/']);
+      .create(fullName, email)
+      .subscribe((customers) =>  {
+         this.customers.push(customers[0]);
+        this.route.navigate(['/']);
+      });
     }
 
   }

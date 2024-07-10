@@ -41,8 +41,10 @@ import { InvoicesService } from '../services/invoices.services';
       console.log("idCustomer: "+customerId)
       this.serviceInvoice
       .create(Number(this.route.snapshot.paramMap.get('id')), cost, state)
-      .subscribe();
-      this.router.navigate(['/'+Number(this.route.snapshot.paramMap.get('id'))+'/details']);
+      .subscribe(() =>{
+        //Je m'assure que la redirection ne se fait qu'après avoir enregistré la donnée
+        this.router.navigate(['/'+Number(this.route.snapshot.paramMap.get('id'))]);
+      });
     }
 
   }

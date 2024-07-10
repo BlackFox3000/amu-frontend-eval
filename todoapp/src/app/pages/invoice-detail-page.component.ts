@@ -12,7 +12,7 @@ import { InvoicesService } from '../services/invoices.services';
     <h2>Editer une facture</h2>
 
    Bientot disponible
-   <a routerLink="/{{ idcustomer }}/details">Retour client</a>
+   <a routerLink="/{{idcustomer}}">Retour client</a>
     `,
     styles: []
   })

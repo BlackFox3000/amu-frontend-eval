@@ -14,16 +14,16 @@ import { InvoicesService } from "../services/invoices.services";
     template: `
         <ng-container *ngIf="customer">
             <h2>
-                Fiche de {{ customer.completeName }}
+                Fiche de {{ customer.fullName }}
             </h2>
-            <h3>({{customer.mail}})</h3>
+            <h3>({{customer.email}})</h3>
             
             <app-invoice-list 
                 [invoices]="invoices"
             ></app-invoice-list>
 
             <br />
-            <a routerLink="/">Retour accueil</a>
+            <a routerLink="/">Retour aux clients</a>
         </ng-container>
 
         <p *ngIf="!customer">En cours de chargement</p>

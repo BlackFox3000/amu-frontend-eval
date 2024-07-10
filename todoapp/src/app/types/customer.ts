@@ -5,9 +5,9 @@ export type Customer = {
     // Une propriété id numérique
     id: number;
     // Une propriété text de type string
-    completeName: string;
+    fullName: string;
     // Une propriété done de type string
-    mail: string;
+    email: string;
 }
 
 export type Customers = Customer[];
